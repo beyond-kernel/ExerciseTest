@@ -1,2 +1,2 @@
-# impacta-integration-testing
-Integration testing with java for Impacta studients
+# ExerciseTest
+Nome da dupla Rafael e David Jr.
