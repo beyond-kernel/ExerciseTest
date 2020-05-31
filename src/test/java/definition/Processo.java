@@ -1,16 +1,18 @@
 package definition;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Processo {
 
 
     private static String lastId;
-    private static String url = "http://agapito-server.herokuapp.com/processos";
+    private static @NotNull String url = "http://agapito-server.herokuapp.com/processos";
 
     public static void setLast(String id) {
         lastId = id;
     }
-
-    public static String getUrl() {
+    public static String getLastId(){return lastId;}
+    public static @NotNull String getUrl() {
         return url;
     }
 

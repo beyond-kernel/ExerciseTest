@@ -4,6 +4,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Então;
 import groovy.json.internal.LazyMap;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import support.RESTSupport;
 
@@ -32,7 +33,7 @@ public class GeneralSteps {
     }
 
     @Then("^user should see fields below:$")
-    public void userShouldSeeFieldsBelow(List<List<String>> table) {
+    public void userShouldSeeFieldsBelow(@NotNull List<List<String>> table) {
             System.out.println(table);
             String field = "";
             String value = "";

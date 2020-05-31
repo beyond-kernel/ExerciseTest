@@ -11,11 +11,13 @@ import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 
 import groovy.json.internal.LazyMap;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import steps.Hooks;
 
 public class RESTSupport {
 
-    private static RequestSpecification rs;
+    private static @Nullable RequestSpecification rs;
     private static RequestSpecification rsAux;
 
     private static Response response;
@@ -30,7 +32,7 @@ public class RESTSupport {
 
     public static void clearRs(){ rs = null; }
 
-    private static RequestSpecification buildBaseRequestSpecification() {
+    private static @Nullable RequestSpecification buildBaseRequestSpecification() {
         clearRs();
         if (!(rsAux == null)) {
             rs.headers(((RequestSpecificationImpl) rsAux).getHeaders());
@@ -45,13 +47,13 @@ public class RESTSupport {
         return rs;
     }
 
-    public static void addHeader(Header h) {
+    public static void addHeader(@Nullable Header h) {
         if (h != null) {
             rsAux.header(h);
         }
     }
 
-    public static void addCookies(Map<String, String> c) {
+    public static void addCookies(@Nullable Map<String, String> c) {
         if (c != null) {
             rsAux.cookies(c);
         }
@@ -78,7 +80,7 @@ public class RESTSupport {
         return response;
     }
 
-    public static Response executePost(String endpoint, Integer statusCode, LazyMap json) {
+    public static Response executePost(String endpoint, Integer statusCode, @NotNull LazyMap json) {
         response = buildBaseRequestSpecification()
                 .body(json)
                 .post(endpoint)
@@ -90,7 +92,7 @@ public class RESTSupport {
         return response;
     }
 
-    public static Response executePost(String endpoint, LazyMap json) {
+    public static Response executePost(String endpoint, @NotNull LazyMap json) {
         response = buildBaseRequestSpecification()
                 .body(json)
                 .post(endpoint)
@@ -101,7 +103,7 @@ public class RESTSupport {
         return response;
     }
 
-    public static Response executePut(String endpoint, LazyMap json) {
+    public static Response executePut(String endpoint, @NotNull LazyMap json) {
         response = buildBaseRequestSpecification()
                 .body(json)
                 .put(endpoint)
@@ -132,7 +134,7 @@ public class RESTSupport {
         return response;
     }
 
-    public static Response executePatch(String endpoint, LazyMap json) {
+    public static Response executePatch(String endpoint, @NotNull LazyMap json) {
         response = buildBaseRequestSpecification()
                 .body(json)
                 .patch(endpoint)
@@ -158,7 +160,7 @@ public class RESTSupport {
         Hooks.scenario.write("Body - Request: [ " + json + " ]");
     }
 
-    private static void printLog(String method, Response response){
+    private static void printLog(String method, @NotNull Response response){
         System.out.println("");
         System.out.println("------------------------------------");
         System.out.println("");
