@@ -20,3 +20,16 @@ Feature: Update a Process
     When The user clicks on btn-update
 
     Then user should see "success" message
+
+
+  Scenario: Update a simples process with read field
+    Given The user fill "observacao" with value "Nova teste"
+    And The user clicks on btn-update
+    When the user search the last process save
+    Then The user see "observacao" in the field "Nova teste"
+
+
+  Scenario: Update a process with id non-existent
+    Given The user fill "observacao" with value "Nova teste"
+    When The user clicks on btn-update with invalid id
+    Then user should see "not found" message
